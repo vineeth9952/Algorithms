@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+int MIN(int a, int b, int c)
+{
+   if(a<b && a<c)
+    return a;
+   else if(b<c)
+    return b;
+   else
+    return c;
+}
+int MAX(int a, int b, int c)
+{
+   if(a>b && a>c)
+    return a;
+   else if(b>c)
+    return b;
+   else
+    return c;
+}
+int TwoPointerMin(vector<int> a, vector<int> b, vector<int> c, int len)
+{  
+    int i=0,j=0,k=0;
+    int value,minValue=INT_MAX;
+    
+    while(len!=0)
+    {
+        value = abs(MAX(a[i],b[j],c[k])-MIN(a[i],b[j],c[k]));
+        minValue = (value<minValue) ? value : minValue ;
+    
+        if(MIN(a[i],b[j],c[k])==a[i])
+          i++;
+        else if(MIN(a[i],b[j],c[k])==b[j])
+          j++;
+        else
+          k++;
+        
+        len--;
+    }
+    return minValue;
+}
+int main() 
+{
+    vector<int> a = {1,4,5,8,10};
+    vector<int> b = {6,9,15,20,25};
+    vector<int> c = {2,3,6,6,23};
+    
+    int len=a.size();
+    
+    cout<<TwoPointerMin(a,b,c,len);
+    
+      
+  
+    return 0;
+}
