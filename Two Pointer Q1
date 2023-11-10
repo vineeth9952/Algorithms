@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+int TwoPointerSum(vector<int> arr, int n, int k)
+{
+   int s=0,e=n-1,c1=0,c2=0,res=0;
+    while(s<=e)
+    {
+        if(arr[s]+arr[e]>k)
+        {
+           e--;
+        }
+        else if(arr[s]+arr[e]<k)
+        {
+           s++;
+        }
+        else 
+        {
+           c1 = 0;
+           while(arr[s]==arr[s+c1] && s<=e)
+           {
+              c1++;
+           }
+           if(arr[s]!=arr[e])
+           {
+              c2=0;
+              while(arr[e]==arr[e-c2] && s<=e)
+              {
+                 c2++;
+              }
+              // cout<<s<<" "<<e<<endl;
+              res += c1*c2 ;
+              s += c1 ;
+              e -= c2;
+           }
+           else
+           {
+            // cout<<s<<" "<<e<<endl;
+              res += c1*(c1-1)/2;
+              s += c1;
+           }
+        }
+    }
+    return res;
+}
+int main() 
+{
+    vector<int> arr = {1,4,4,5,5,5,6,6,11};
+    // vector<int> arr = {3,6,7,9,12,13,14,17,19};
+    
+    int n=arr.size();
+    // cout<<n<<"\n";
+    int k=10;
+    printf("%d ",TwoPointerSum(arr,n,k));
+    return 0;
+}
